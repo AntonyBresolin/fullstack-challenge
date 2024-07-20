@@ -41,8 +41,9 @@ return (
           invalid:border-pink-500 invalid:text-pink-600
           focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
         name="cpf"
+        required
       />
-      <input type="password" placeholder="Insira sua senha" className="w-full pl-4 mx-4 py-4 mb-4 border rounded-md border-gray-300 shadow-md focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700
+      <input type="password" placeholder="Insira sua senha" className="w-full pl-4 mx-4 py-4 mb-4 border rounded-md border-emerald-200 shadow-md focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700
           invalid:border-pink-500 invalid:text-pink-600
           focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
         name="password"
