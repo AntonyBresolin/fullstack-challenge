@@ -21,8 +21,11 @@ public class Schedule {
     @CreationTimestamp
     private Timestamp createdAt;
 
-    @Column(nullable = false)
+    @Column()
     private Timestamp dateEnd;
+
+    @Column(nullable = false)
+    private int votingTime = 60;
 
     @Column(nullable = false)
     private Boolean active;
@@ -32,6 +35,14 @@ public class Schedule {
 
     public Long getScheduleId() {
         return scheduleId;
+    }
+
+    public int getVotingTime() {
+        return votingTime;
+    }
+
+    public void setVotingTime(int votingTime) {
+        this.votingTime = votingTime;
     }
 
     public void setScheduleId(Long scheduleId) {
