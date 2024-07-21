@@ -1,14 +1,14 @@
 import React from 'react';
 import ScheduleVoteItem from './scheduleItem/ScheduleVoteItem';
 
-const SchedulesPending = ({ schedules }) => {
+const SchedulesPending = ({ schedules, scheduleSelected }) => {
 
   return (
     <div className='bg-white w-full max-w-full rounded-xl py-12 px-8 overflow-x-hidden'>
       <h1 className='text-2xl font-medium text-justify'>Pautas Pendentes:</h1>
       <div className='flex flex-row w-full justify-between '>
         {schedules.map((schedule, index) => (
-          <ScheduleVoteItem key={index} schedule={schedule} />
+          <ScheduleVoteItem key={index} schedule={schedule} scheduleSelected={scheduleSelected}  />
         ))}
       </div>
       <div className='float-right gap-x-2 flex mt-2'>

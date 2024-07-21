@@ -31,7 +31,6 @@ const NewSchedule = () => {
             required
           />
         </div>
-
         <div className='w-full mb-4'>
           <h2 className='text-xl font-semibold'>Descrição</h2>
           <textarea

@@ -23,7 +23,7 @@ const Topbar = () => {
   return (
     <>
       <Sidebar open={open} />
-      <nav className="bg-[#fff] px-4 select-none w-full shadow-sm fixed top-0 z-40 flex justify-between items-center">
+      <nav className="bg-[#fff] px-4 select-none w-full shadow-sm fixed top-0 z-10 flex justify-between items-center">
         <div onClick={handleOpen}>
           <MenuIcon fontSize="" className="text-3xl text-black cursor-pointer hover:text-emerald-800 ml-[8px] duration-150 ease-in-out" />
         </div>
