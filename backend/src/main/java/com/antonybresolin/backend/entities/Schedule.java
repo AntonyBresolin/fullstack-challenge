@@ -30,6 +30,7 @@ public class Schedule {
     @Column(nullable = false)
     private Boolean active;
 
+
     public Schedule() {
     }
 

@@ -14,10 +14,17 @@ public class VotingResult {
     private Long votingResultId;
     @Column(name = "total_votes", nullable = false)
     private Long totalVotes;
-    @Column(name = "total_valid_votes", nullable = false)
-    private Long totalValidVotes;
     @Column(name = "total_invalid_votes", nullable = false)
     private Long totalInvalidVotes;
+
+    @Column(name = "votes_against", nullable = false)
+    private Long totalVotesAgainst;
+
+    @Column(name = "votes_in_favor", nullable = false)
+    private Long totalVotesInFavor;
+
+    @Column(name = "final_result", nullable = false)
+    private Boolean isApproved;
 
     @CreationTimestamp
     private Instant finalResultTime;
@@ -29,6 +36,14 @@ public class VotingResult {
     public VotingResult() {
     }
 
+public VotingResult(Long totalVotes, Long totalInvalidVotes, Long totalVotesAgainst, Long totalVotesInFavor, Schedule schedule) {
+        this.totalVotes = totalVotes;
+        this.totalInvalidVotes = totalInvalidVotes;
+        this.totalVotesAgainst = totalVotesAgainst;
+        this.totalVotesInFavor = totalVotesInFavor;
+        this.schedule = schedule;
+        this.isApproved = totalVotesInFavor > totalVotesAgainst;
+    }
     public Long getVotingResultId() {
         return votingResultId;
     }
@@ -45,14 +60,6 @@ public class VotingResult {
         this.totalVotes = totalVotes;
     }
 
-    public Long getTotalValidVotes() {
-        return totalValidVotes;
-    }
-
-    public void setTotalValidVotes(Long totalValidVotes) {
-        this.totalValidVotes = totalValidVotes;
-    }
-
     public Long getTotalInvalidVotes() {
         return totalInvalidVotes;
     }
@@ -61,12 +68,20 @@ public class VotingResult {
         this.totalInvalidVotes = totalInvalidVotes;
     }
 
-    public Schedule getSchedule() {
-        return schedule;
+    public Long getTotalVotesAgainst() {
+        return totalVotesAgainst;
     }
 
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
+    public void setTotalVotesAgainst(Long totalVotesAgainst) {
+        this.totalVotesAgainst = totalVotesAgainst;
+    }
+
+    public Long getTotalVotesInFavor() {
+        return totalVotesInFavor;
+    }
+
+    public void setTotalVotesInFavor(Long totalVotesInFavor) {
+        this.totalVotesInFavor = totalVotesInFavor;
     }
 
     public Instant getFinalResultTime() {
@@ -75,5 +90,13 @@ public class VotingResult {
 
     public void setFinalResultTime(Instant finalResultTime) {
         this.finalResultTime = finalResultTime;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
     }
 }
