@@ -10,7 +10,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/dashboard" element={<User />} />
+      <Route path="/user/*" element={<User />} />
     </Routes>
   </BrowserRouter>
 );

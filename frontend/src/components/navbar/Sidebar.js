@@ -4,7 +4,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import HelpIcon from '@mui/icons-material/Help';
-import SettingsIcon from '@mui/icons-material/Settings';
+//import SettingsIcon from '@mui/icons-material/Settings';
 import { NavLink } from 'react-router-dom';
 
 
@@ -21,7 +21,7 @@ const Sidebar = ({ open }) => {
     })}>
       <nav className='flex flex-col pt-[61px] justify-between h-full'>
         <div className='flex flex-col items-center px-2 py-2'>
-          <NavLink to={'/dashboard'} className={classNames(
+          <NavLink to={'/user/dashboard'} className={classNames(
             'w-full flex items-center py-4 px-4 rounded-2xl  font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
             'bg-emerald-800 text-white': selected === 0,
             'text-emerald-800': selected !== 0,
@@ -34,7 +34,7 @@ const Sidebar = ({ open }) => {
               'hidden': open,
             })}>Dashboard</span>
           </NavLink>
-          <div className={classNames(
+          <NavLink to={"/user/register"} className={classNames(
             'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
             'bg-emerald-800 text-white': selected === 1,
             'text-emerald-800': selected !== 1,
@@ -46,8 +46,8 @@ const Sidebar = ({ open }) => {
             <span className={classNames('ml-3', {
               'hidden': open,
             })}>Registros</span>
-          </div>
-          <div className={classNames(
+          </NavLink>
+          <NavLink to={"/user/analysis"} className={classNames(
             'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
             'bg-emerald-800 text-white': selected === 2,
             'text-emerald-800': selected !== 2,
@@ -60,8 +60,8 @@ const Sidebar = ({ open }) => {
             <span className={classNames('ml-3', {
               'hidden': open,
             })}>Análises</span>
-          </div>
-          <NavLink to='' className={classNames(
+          </NavLink>
+          {/* <NavLink to={"/user/configuration"}  className={classNames(
             'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
             'bg-emerald-800 text-white': selected === 3,
             'text-emerald-800': selected !== 3,
@@ -74,7 +74,7 @@ const Sidebar = ({ open }) => {
             <span className={classNames('ml-3', {
               'hidden': open,
             })}>Configurações</span>
-          </NavLink>
+          </NavLink> */}
         </div>
         <div>
           <hr></hr>

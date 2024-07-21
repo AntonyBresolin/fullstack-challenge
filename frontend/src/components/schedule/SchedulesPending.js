@@ -1,30 +1,7 @@
 import React from 'react';
 import ScheduleVoteItem from './scheduleItem/ScheduleVoteItem';
 
-const SchedulesPending = () => {
-
-  const schedules = [
-    {
-      title: 'Titulo Pauta 1',
-      description: 'ASNFALSKFN LASMDLKASMDLK ASMKLDMASKL DMASKL DMASKLMD LAKSMDLKASMD LKASMD LKASMD LKASMDLKASMDKLASDMKLSADMASLKDMALSK MDLK MDLKMASLKD MALKS DMLKASMDLK ASMDLK A',
-      created_at: '2021-09-01',
-    },
-    {
-      title: 'Capacitação de Cooperados',
-      description: 'A importancia de se ter um bom café da manhã',
-      created_at: '2021-09-01',
-    },
-    {
-      title: 'Devemos comprar uma cafeteira?',
-      description: 'Vamos discutir a necessidade de se ter uma cafeteira na empresa',
-      created_at: '2021-09-10',
-    },
-    {
-      title: 'Devemos comprar uma cafeteira?',
-      description: 'Vamos discutir a necessidade de se ter uma cafeteira na empresa',
-      created_at: '2021-09-10',
-    }
-  ];
+const SchedulesPending = ({ schedules }) => {
 
   return (
     <div className='bg-white w-full max-w-full rounded-xl py-12 px-8 overflow-x-hidden'>
@@ -33,6 +10,10 @@ const SchedulesPending = () => {
         {schedules.map((schedule, index) => (
           <ScheduleVoteItem key={index} schedule={schedule} />
         ))}
+      </div>
+      <div className='float-right gap-x-2 flex mt-2'>
+        <button className='bg-gray-400 text-white px-4 py-2 rounded-xl mt-4 hover:bg-gray-500 duration-150 ease-in-out'>Anterior</button>
+        <button className='bg-gray-600 text-white px-4 py-2 rounded-xl mt-4 hover:bg-gray-700 duration-150 ease-in-out'>Próximo</button>
       </div>
     </div>
   );
