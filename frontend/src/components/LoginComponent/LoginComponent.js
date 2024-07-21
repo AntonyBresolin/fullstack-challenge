@@ -1,6 +1,9 @@
 import React from 'react';
+import { UserControllerService } from '../../services/UserControllerService';
+import { useNavigate } from 'react-router-dom';
 
 const LoginComponent = () => {
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -10,12 +13,26 @@ const LoginComponent = () => {
       password: e.target.password.value
     };
 
-    console.log(dataLogin);
+    UserControllerService.loginUser(dataLogin)
+    .then((response) => {
+      
+      console.log(response);
+      if(response === 200) {
+        console.log('Login efetuado com sucesso');
+        setTimeout(() => {
+          navigate("/user/dashboard");
+        }, 500);
+        return 200;
+      } else if(response === 401) {
+        console.log('Usuário ou senha inválidos');
+      } else {
+        console.log('Erro ao efetuar login');
+      }
+    })
 }
 
 return (
   <div className='h-full w-full flex flex-col items-center justify-between py-[20%]'>
-
     <svg width="30%" height="30%" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fillRule="evenodd" clipRule="evenodd" d="M475.499 82.4993C625.578 79.1343 746.078 136.467 836.999 254.499C920.401 375.658 938.068 505.991 889.999 645.499C842.86 764.638 759.36 846.804 639.499 891.999C510.834 934.851 388.834 920.851 273.499 849.999C157.269 770.908 93.7694 660.742 82.9994 519.499C79.5798 392.362 123.079 284.529 213.499 195.999C287.462 127.864 374.795 90.0308 475.499 82.4993Z" fill="#02796A" />
       <path fillRule="evenodd" clipRule="evenodd" d="M613.5 328.5C615.482 315.208 616.149 301.541 615.5 287.5C571.167 287.5 526.833 287.5 482.5 287.5C492.315 273.394 502.982 259.894 514.5 247C521.525 243.21 528.858 242.543 536.5 245C580.179 262.337 625.179 275.004 671.5 283C679.493 283.5 687.493 283.666 695.5 283.5C695.5 312.167 695.5 340.833 695.5 369.5C684.424 369.465 673.757 371.632 663.5 376C641.35 381.749 619.017 382.749 596.5 379C586.144 377.107 575.81 375.107 565.5 373C541.167 372.667 516.833 372.333 492.5 372C485.327 371.5 478.327 370.166 471.5 368C462.346 362.42 461.346 355.753 468.5 348C475.633 344.195 483.3 342.195 491.5 342C516.167 341.667 540.833 341.333 565.5 341C581.285 335.903 597.285 331.736 613.5 328.5Z" fill="#FCFDFD" />
@@ -41,6 +58,7 @@ return (
           invalid:border-pink-500 invalid:text-pink-600
           focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
         name="cpf"
+        defaultValue={"43194161040"}
         required
       />
       <input type="password" placeholder="Insira sua senha" className="w-full pl-4 mx-4 py-4 mb-4 border rounded-md border-emerald-200 shadow-md focus:outline-none focus:border-emerald-700 focus:ring-1 focus:ring-emerald-700

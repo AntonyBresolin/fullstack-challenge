@@ -5,7 +5,7 @@ const ScheduleCompletedItem = ({ schedule }) => {
 
 
   return (
-    <div className='flex justify-between items-center border mt-8 pb-4 flex-col bg-gray-50 w-72 h-64 rounded-2xl'>
+    <div className='flex justify-between items-center border mt-8 pb-4 flex-col bg-gray-50 w-72 h-64 rounded-2xl shadow-md'>
       <h3 className={classNames('text-xl font-medium text-center py-2 w-full text-white rounded-t-xl', {
         'bg-emerald-800': schedule.result === 'approved',
         'bg-red-800': schedule.result !== 'approved',

@@ -34,33 +34,36 @@ const Sidebar = ({ open }) => {
               'hidden': open,
             })}>Dashboard</span>
           </NavLink>
-          <NavLink to={"/user/register"} className={classNames(
-            'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
-            'bg-emerald-800 text-white': selected === 1,
-            'text-emerald-800': selected !== 1,
-          })} onClick={() => handleSelected(1)}>
-            <PersonAddIcon fontSize='' className={classNames(
-              'text-3xl', {
-              'text-white': selected === 1,
-            })} />
-            <span className={classNames('ml-3', {
-              'hidden': open,
-            })}>Registros</span>
-          </NavLink>
-          <NavLink to={"/user/analysis"} className={classNames(
-            'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
-            'bg-emerald-800 text-white': selected === 2,
-            'text-emerald-800': selected !== 2,
-          })}
-            onClick={() => handleSelected(2)}>
-            <AddchartIcon fontSize='' className={classNames(
-              'text-3xl', {
-              'text-white': selected === 2,
-            })} />
-            <span className={classNames('ml-3', {
-              'hidden': open,
-            })}>Análises</span>
-          </NavLink>
+          {localStorage.getItem("role") === 'ADMIN' &&
+            <NavLink to={"/user/register"} className={classNames(
+              'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
+              'bg-emerald-800 text-white': selected === 1,
+              'text-emerald-800': selected !== 1,
+            })} onClick={() => handleSelected(1)}>
+              <PersonAddIcon fontSize='' className={classNames(
+                'text-3xl', {
+                'text-white': selected === 1,
+              })} />
+              <span className={classNames('ml-3', {
+                'hidden': open,
+              })}>Registros</span>
+            </NavLink>}
+          {localStorage.getItem("role") === 'ADMIN' &&
+            <NavLink to={"/user/analysis"} className={classNames(
+              'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
+              'bg-emerald-800 text-white': selected === 2,
+              'text-emerald-800': selected !== 2,
+            })}
+              onClick={() => handleSelected(2)}>
+              <AddchartIcon fontSize='' className={classNames(
+                'text-3xl', {
+                'text-white': selected === 2,
+              })} />
+              <span className={classNames('ml-3', {
+                'hidden': open,
+              })}>Análises</span>
+            </NavLink>}
+
           {/* <NavLink to={"/user/configuration"}  className={classNames(
             'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
             'bg-emerald-800 text-white': selected === 3,

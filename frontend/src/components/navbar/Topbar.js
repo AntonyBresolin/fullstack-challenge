@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Sidebar from "./Sidebar";
 import classNames from "classnames";
+import { UserControllerService } from "../../services/UserControllerService";
 
 
 const Topbar = () => {
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
+  const navigate = useNavigate();
+
 
   const handleOpen = () => {
     setOpen(!open);
@@ -17,6 +20,11 @@ const Topbar = () => {
 
   const handleDropdown = () => {
     setDropdown(!dropdown);
+  }
+
+  const handleLogout = () => {
+    UserControllerService.logoutUser()
+    navigate('/');
   }
 
 
@@ -42,10 +50,10 @@ const Topbar = () => {
           </div>
           <div className={`absolute md:mt-[60px] right-8 bg-[#fff] ${dropdown ? "block" : "hidden"} rounded-b-lg shadow-lg `}>
             <ul className="text-green-700">
-              <NavLink to="/" className="cursor-pointer p-2 w-64  select-none flex items-center hover:bg-slate-100 ">
+              <div onClick={() => { handleLogout() }} to="/" className="cursor-pointer p-2 w-64  select-none flex items-center hover:bg-slate-100 ">
                 <LogoutIcon fontSize="" className="text-2xl mr-4" />
                 <span className="text-black">Sair</span>
-              </NavLink>
+              </div>
             </ul>
           </div>
         </div>

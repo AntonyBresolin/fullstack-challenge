@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Dashboard from '../views/user/Dashboard';
 import Topbar from '../components/navbar/Topbar';
 import Register from '../views/user/Register';
@@ -15,6 +15,7 @@ const User = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/register" element={<Register />} />
             <Route path="/analysis" element={<Analysis />} />
+            <Route path="*" element={<Navigate to="/user/dashboard" />} />
           </Routes>
           <Outlet />
         </div >
