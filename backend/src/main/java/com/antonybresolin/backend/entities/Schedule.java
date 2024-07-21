@@ -33,6 +33,14 @@ public class Schedule {
     public Schedule() {
     }
 
+    public Schedule(String title, String description, int votingTime) {
+        this.title = title;
+        this.description = description;
+        this.votingTime = votingTime;
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+        this.active = true;
+    }
+
     public Long getScheduleId() {
         return scheduleId;
     }
@@ -88,5 +96,10 @@ public class Schedule {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public void close() {
+        this.active = false;
+        this.dateEnd = new Timestamp(System.currentTimeMillis());
     }
 }
