@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "tb_votes")
+@Table(name = "tb_votes", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_id", "schedule_id"})
+})
 public class Vote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,5 +86,13 @@ public class Vote {
         YES,
         NO,
         INVALID
+    }
+
+    public Vote(Schedule schedule, Timestamp voteStartTime, Timestamp voteEndTime, VoteValue value, User user) {
+        this.schedule = schedule;
+        this.voteStartTime = voteStartTime;
+        this.voteEndTime = voteEndTime;
+        this.value = value;
+        this.user = user;
     }
 }
