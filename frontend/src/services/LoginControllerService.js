@@ -7,24 +7,22 @@ export class LoginControllerService {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-      }).then(response => {
-        if (response.status === 200) {
-          response.json().then(data => {
-            localStorage.setItem('role', data.role);
-            localStorage.setItem('user', data.accessToken);
-          });
-          return response.status;
-        } else if (response.status === 401) {
-          return 401;
-        } else {
-          return 500
-        }
-      })
-      return response;
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        localStorage.setItem('role', data.role);
+        localStorage.setItem('user', data.accessToken);
+        return response.status;
+      } else if (response.status === 401) {
+        return 401;
+      } else {
+        return 500;
+      }
     } catch (error) {
       console.error('Error:', error);
+      return 500;
     }
-
   }
 
   static async logoutUser() {
@@ -32,7 +30,4 @@ export class LoginControllerService {
     localStorage.removeItem('role');
     localStorage.removeItem('user');
   }
-
-  
 }
-

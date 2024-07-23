@@ -4,6 +4,7 @@ import SchedulesCompleted from '../../components/schedule/SchedulesCompleted';
 import VoteModal from '../../components/vote/VoteModal';
 import VotationModal from '../../components/vote/VotationModal';
 import { ScheduleService } from '../../services/ScheduleService';
+import { LoginControllerService } from '../../services/LoginControllerService';
 
 const Dashboard = () => {
   const [scheduleSelected, setScheduleSelected] = useState(null);
@@ -34,6 +35,7 @@ const Dashboard = () => {
         ]);
 
         if (pendingResponse === 500) {
+          LoginControllerService.logoutUser();
           console.log('Erro ao buscar pautas pendentes');
         } else if (pendingResponse === 404) {
           console.log('Nenhuma pauta pendente encontrada');
@@ -42,6 +44,7 @@ const Dashboard = () => {
         }
 
         if (completedResponse === 500) {
+          LoginControllerService.logoutUser();
           console.log('Erro ao buscar pautas concluídas');
         } else if (completedResponse === 404) {
           console.log('Nenhuma pauta concluída encontrada');

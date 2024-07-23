@@ -1,9 +1,11 @@
 import React from 'react';
 import { LoginControllerService } from '../../services/LoginControllerService';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../routes/AuthProvider';
 
 const LoginComponent = () => {
   const navigate = useNavigate();
+  const { setAuthToken } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,13 +18,11 @@ const LoginComponent = () => {
     LoginControllerService.loginUser(dataLogin)
       .then((response) => {
 
-        console.log(response);
         if (response === 200) {
-          console.log('Login efetuado com sucesso');
+          setAuthToken(localStorage.getItem('user'));
           setTimeout(() => {
             navigate("/user/dashboard");
           }, 500);
-          return 200;
         } else if (response === 401) {
           console.log('Usuário ou senha inválidos');
         } else {
