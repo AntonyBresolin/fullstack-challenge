@@ -9,6 +9,7 @@ const Dashboard = () => {
   const [scheduleSelected, setScheduleSelected] = useState(null);
   const [modalType, setModalType] = useState(null);
   const [schedulesPending, setSchedulesPending] = useState([]);
+  const [schedulesCompleted, setSchedulesCompleted] = useState([]);
 
   const handleScheduleSelectedToVote = (schedule) => {
     setModalType('vote');
@@ -25,65 +26,35 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    ScheduleService.getSchedulesPending().then(response => {
-      if (response === 500) {
-        console.log('Erro ao buscar pautas pendentes');
-      } else if (response === 404) {
-        console.log('Nenhuma pauta pendente encontrada');
-      } else {
-        setSchedulesPending(response);
+    const fetchSchedules = async () => {
+      try {
+        const [pendingResponse, completedResponse] = await Promise.all([
+          ScheduleService.getSchedulesPending(),
+          ScheduleService.getSchedulesCompleted()
+        ]);
+
+        if (pendingResponse === 500) {
+          console.log('Erro ao buscar pautas pendentes');
+        } else if (pendingResponse === 404) {
+          console.log('Nenhuma pauta pendente encontrada');
+        } else {
+          setSchedulesPending(pendingResponse);
+        }
+
+        if (completedResponse === 500) {
+          console.log('Erro ao buscar pautas concluídas');
+        } else if (completedResponse === 404) {
+          console.log('Nenhuma pauta concluída encontrada');
+        } else {
+          setSchedulesCompleted(completedResponse);
+          console.log(completedResponse);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar pautas:', error);
       }
-    }
-    );
+    };
+    fetchSchedules();
   }, []);
-
-  const schedulesCompleted = [
-    {
-      total_votes: 100,
-      votes_in_favor: 80,
-      votes_against: 20,
-      votes_invalid: 0,
-      result: 'approved',
-      schedule: {
-        title: 'Titulo Pauta 1',
-        date_end: '2021-09-01',
-      }
-    },
-    {
-      total_votes: 120,
-      votes_in_favor: 25,
-      votes_against: 90,
-      votes_invalid: 5,
-      result: 'disapproved',
-      schedule: {
-        title: 'Titulo Pauta 2',
-        date_end: '2021-09-01',
-      }
-    },
-    {
-      total_votes: 150,
-      votes_in_favor: 110,
-      votes_against: 30,
-      votes_invalid: 10,
-      result: 'approved',
-      schedule: {
-        title: 'Titulo Pauta 3',
-        date_end: '2021-09-01',
-      }
-    },
-    {
-      total_votes: 80,
-      votes_in_favor: 50,
-      votes_against: 25,
-      votes_invalid: 5,
-      result: 'approved',
-      schedule: {
-        title: 'Titulo Pauta 4',
-        date_end: '2021-09-01',
-      }
-    }
-  ];
-
 
   return (
     <>
