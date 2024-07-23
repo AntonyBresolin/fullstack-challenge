@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Sidebar from "./Sidebar";
 import classNames from "classnames";
-import { UserControllerService } from "../../services/UserControllerService";
+import { LoginControllerService } from "../../services/LoginControllerService";
 
 
 const Topbar = () => {
@@ -23,7 +23,7 @@ const Topbar = () => {
   }
 
   const handleLogout = () => {
-    UserControllerService.logoutUser()
+    LoginControllerService.logoutUser()
     navigate('/');
   }
 

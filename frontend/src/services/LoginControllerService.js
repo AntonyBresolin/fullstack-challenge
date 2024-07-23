@@ -1,4 +1,4 @@
-export class UserControllerService {
+export class LoginControllerService {
   static async loginUser(data) {
     try {
       const response = await fetch('http://localhost:8080/api/v1/login', {
@@ -32,5 +32,7 @@ export class UserControllerService {
     localStorage.removeItem('role');
     localStorage.removeItem('user');
   }
+
+  
 }
 

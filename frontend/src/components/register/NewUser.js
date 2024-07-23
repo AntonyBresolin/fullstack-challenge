@@ -1,4 +1,6 @@
 import React from 'react';
+import Swal from 'sweetalert2'
+import { UserService } from '../../services/UserService';
 
 const NewUser = () => {
   const handleSubmit = (e) => {
@@ -8,7 +10,34 @@ const NewUser = () => {
       password: e.target.password.value
     }
 
-    console.log(data);
+    UserService.registerUser(data).then(response => {
+      if (response === 200) {
+        Swal.fire({
+          title: "Sucesso!",
+          text: "Usuário Cadastrado com sucesso!",
+          icon: "success"
+        });
+      } else if (response === 404) {
+        Swal.fire({
+          title: "Erro!",
+          text: "Usuário não autorizado para votação em pautas!",
+          icon: "warning"
+        });
+      } else if( response === 422) {
+        Swal.fire({
+          title: "Erro!",
+          text: "CPF já cadastrado!",
+          icon: "error"
+        });
+      }
+      else {
+        Swal.fire({
+          title: "Erro!",
+          text: "Erro ao cadastrar usuário!",
+          icon: "error"
+        });
+      }
+    })
   }
 
 
