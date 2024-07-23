@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SchedulesPending from '../../components/schedule/SchedulesPending';
 import SchedulesCompleted from '../../components/schedule/SchedulesCompleted';
 import VoteModal from '../../components/vote/VoteModal';
 import VotationModal from '../../components/vote/VotationModal';
+import { ScheduleService } from '../../services/ScheduleService';
+import { LoginControllerService } from '../../services/LoginControllerService';
 
 const Dashboard = () => {
   const [scheduleSelected, setScheduleSelected] = useState(null);
   const [modalType, setModalType] = useState(null);
+  const [schedulesPending, setSchedulesPending] = useState([]);
+  const [schedulesCompleted, setSchedulesCompleted] = useState([]);
 
   const handleScheduleSelectedToVote = (schedule) => {
     setModalType('vote');
@@ -22,80 +26,38 @@ const Dashboard = () => {
     setScheduleSelected(null);
   }
 
-  const schedulesPending = [
-    {
-      title: 'Titulo Pauta 1',
-      description: 'ASNFALSKFN LASMDLKASMDLK ASMKLDMASKL DMASKL DMASKLMD LAKSMDLKASMD LKASMD LKASMD LKASMDLKASMDKLASDMKLSADMASLKDMALSK MDLK MDLKMASLKD MALKS DMLKASMDLK ASMDLK A',
-      created_at: '2021-09-01',
-      votingTime: 68,
-    },
-    {
-      title: 'Capacitação de Cooperados',
-      description: 'A importancia de se ter um bom café da manhã',
-      created_at: '2021-09-01',
-      votingTime: 5,
-    },
-    {
-      title: 'Devemos comprar uma cafeteira?',
-      description: 'Vamos discutir a necessidade de se ter uma cafeteira na empresa',
-      created_at: '2021-09-10',
-      votingTime: 60,
-    },
-    {
-      title: 'Devemos comprar uma cafeteira?',
-      description: 'Vamos discutir a necessidade de se ter uma cafeteira na empresa',
-      created_at: '2021-09-10',
-      votingTime: 70,
-    }
-  ];
+  useEffect(() => {
+    const fetchSchedules = async () => {
+      try {
+        const [pendingResponse, completedResponse] = await Promise.all([
+          ScheduleService.getSchedulesPending(),
+          ScheduleService.getSchedulesCompleted()
+        ]);
 
-  const schedulesCompleted = [
-    {
-      total_votes: 100,
-      votes_in_favor: 80,
-      votes_against: 20,
-      votes_invalid: 0,
-      result: 'approved',
-      schedule: {
-        title: 'Titulo Pauta 1',
-        date_end: '2021-09-01',
-      }
-    },
-    {
-      total_votes: 120,
-      votes_in_favor: 25,
-      votes_against: 90,
-      votes_invalid: 5,
-      result: 'disapproved',
-      schedule: {
-        title: 'Titulo Pauta 2',
-        date_end: '2021-09-01',
-      }
-    },
-    {
-      total_votes: 150,
-      votes_in_favor: 110,
-      votes_against: 30,
-      votes_invalid: 10,
-      result: 'approved',
-      schedule: {
-        title: 'Titulo Pauta 3',
-        date_end: '2021-09-01',
-      }
-    },
-    {
-      total_votes: 80,
-      votes_in_favor: 50,
-      votes_against: 25,
-      votes_invalid: 5,
-      result: 'approved',
-      schedule: {
-        title: 'Titulo Pauta 4',
-        date_end: '2021-09-01',
-      }
-    }
-  ];
+        if (pendingResponse === 500) {
+          LoginControllerService.logoutUser();
+          console.log('Erro ao buscar pautas pendentes');
+        } else if (pendingResponse === 404) {
+          console.log('Nenhuma pauta pendente encontrada');
+        } else {
+          setSchedulesPending(pendingResponse);
+        }
 
+        if (completedResponse === 500) {
+          LoginControllerService.logoutUser();
+          console.log('Erro ao buscar pautas concluídas');
+        } else if (completedResponse === 404) {
+          console.log('Nenhuma pauta concluída encontrada');
+        } else {
+          setSchedulesCompleted(completedResponse);
+          console.log(completedResponse);
+        }
+      } catch (error) {
+        console.error('Erro ao buscar pautas:', error);
+      }
+    };
+    fetchSchedules();
+  }, []);
 
   return (
     <>

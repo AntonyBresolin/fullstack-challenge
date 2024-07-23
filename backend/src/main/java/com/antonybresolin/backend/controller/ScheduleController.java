@@ -64,6 +64,11 @@ public class ScheduleController {
         return ResponseEntity.ok(scheduleRepository.findAllByActiveTrueOrderByCreatedAt());
     }
 
+    @GetMapping("/listCompleted")
+    public ResponseEntity<Iterable<VotingResult>> listCompletedSchedules() {
+        return ResponseEntity.ok(votingResultRepository.findAllByOrderByFinalResultTimeAsc());
+    }
+
     public void generateVotingResult(Long scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow();
         List<Vote> votes = voteRepository.findAllByScheduleScheduleId(scheduleId);
@@ -76,4 +81,6 @@ public class ScheduleController {
         VotingResult votingResult = new VotingResult(totalVotes, totalInvalidVotes, totalVotesNo, totalVotesYes, schedule);
         votingResultRepository.save(votingResult);
     }
+
+
 }

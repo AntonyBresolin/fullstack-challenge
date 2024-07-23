@@ -1,4 +1,4 @@
-export class UserControllerService {
+export class LoginControllerService {
   static async loginUser(data) {
     try {
       const response = await fetch('http://localhost:8080/api/v1/login', {
@@ -7,24 +7,22 @@ export class UserControllerService {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
-      }).then(response => {
-        if (response.status === 200) {
-          response.json().then(data => {
-            localStorage.setItem('role', data.role);
-            localStorage.setItem('user', data.accessToken);
-          });
-          return response.status;
-        } else if (response.status === 401) {
-          return 401;
-        } else {
-          return 500
-        }
-      })
-      return response;
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        localStorage.setItem('role', data.role);
+        localStorage.setItem('user', data.accessToken);
+        return response.status;
+      } else if (response.status === 401) {
+        return 401;
+      } else {
+        return 500;
+      }
     } catch (error) {
       console.error('Error:', error);
+      return 500;
     }
-
   }
 
   static async logoutUser() {
@@ -33,4 +31,3 @@ export class UserControllerService {
     localStorage.removeItem('user');
   }
 }
-

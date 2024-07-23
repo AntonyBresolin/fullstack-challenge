@@ -1,12 +1,38 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { VoteService } from '../../services/VoteService';
+import Swal from 'sweetalert2'
+
 
 const VotationModal = ({ schedule, closeModal }) => {
   const [timeLeft, setTimeLeft] = useState(schedule.votingTime);
+  const [timeNow] = useState(new Date());
 
   const handleVote = useCallback((option) => {
-    console.log(option);
+    const vote = {
+      voteStartTime: timeNow.toISOString(),
+      voteEndTime: new Date().toISOString(),
+      value: option,
+      schedule: {
+        scheduleId: schedule.scheduleId
+      }
+    }
+    VoteService.createVote(vote).then(response => {
+      if (response === 200) {
+        Swal.fire({
+          title: "Sucesso!",
+          text: "Voto realizado com sucesso!",
+          icon: "success"
+        })
+      } else {
+        Swal.fire({
+          title: "Erro!",
+          text: "Erro ao realizar voto!",
+          icon: "error"
+        });
+      }
+    });
     closeModal();
-  }, [closeModal]);
+  }, [closeModal, schedule.scheduleId, timeNow]);
 
   useEffect(() => {
     if (timeLeft > 0) {

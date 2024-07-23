@@ -1,4 +1,6 @@
 import React from 'react';
+import { ScheduleService } from '../../services/ScheduleService';
+import Swal from 'sweetalert2'
 
 const NewSchedule = () => {
 
@@ -7,12 +9,38 @@ const NewSchedule = () => {
     const data = {
       title: e.target.title.value,
       description: e.target.description.value,
-      dateEnd: e.target.dateEnd.value,
-      votingTime: e.target.votingTime.value,
-      active: e.target.active.checked,
+      votingTime: parseInt(e.target.votingTime.value),
     }
 
-    console.log(data);
+    ScheduleService.createSchedule(data).then(response => {
+      if (response === 200) {
+        Swal.fire({
+          title: "Sucesso!",
+          text: "Pauta Cadastrada com sucesso!",
+          icon: "success"
+        });
+      } else if (response === 401) {
+        Swal.fire({
+          title: "Erro!",
+          text: "Usuário não autorizado para votação em pautas!",
+          icon: "warning"
+        });
+      } else if (response === 400) {
+        Swal.fire({
+          title: "Erro!",
+          text: "Preencha todos os campos!",
+          icon: "error"
+        });
+      }
+      else {
+        Swal.fire({
+          title: "Erro!",
+          text: "Erro ao cadastrar pauta!",
+          icon: "error"
+        });
+      }
+    }
+    )
   }
 
   return (
@@ -42,6 +70,7 @@ const NewSchedule = () => {
               focus:border-sky-500 focus:ring-1 focus:ring-sky-500
             "
             maxLength="500"
+            required
           />
         </div>
 
