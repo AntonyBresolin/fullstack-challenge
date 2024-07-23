@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SchedulesPending from '../../components/schedule/SchedulesPending';
 import SchedulesCompleted from '../../components/schedule/SchedulesCompleted';
 import VoteModal from '../../components/vote/VoteModal';
 import VotationModal from '../../components/vote/VotationModal';
+import { ScheduleService } from '../../services/ScheduleService';
 
 const Dashboard = () => {
   const [scheduleSelected, setScheduleSelected] = useState(null);
   const [modalType, setModalType] = useState(null);
+  const [schedulesPending, setSchedulesPending] = useState([]);
 
   const handleScheduleSelectedToVote = (schedule) => {
     setModalType('vote');
@@ -22,32 +24,18 @@ const Dashboard = () => {
     setScheduleSelected(null);
   }
 
-  const schedulesPending = [
-    {
-      title: 'Titulo Pauta 1',
-      description: 'ASNFALSKFN LASMDLKASMDLK ASMKLDMASKL DMASKL DMASKLMD LAKSMDLKASMD LKASMD LKASMD LKASMDLKASMDKLASDMKLSADMASLKDMALSK MDLK MDLKMASLKD MALKS DMLKASMDLK ASMDLK A',
-      created_at: '2021-09-01',
-      votingTime: 68,
-    },
-    {
-      title: 'Capacitação de Cooperados',
-      description: 'A importancia de se ter um bom café da manhã',
-      created_at: '2021-09-01',
-      votingTime: 5,
-    },
-    {
-      title: 'Devemos comprar uma cafeteira?',
-      description: 'Vamos discutir a necessidade de se ter uma cafeteira na empresa',
-      created_at: '2021-09-10',
-      votingTime: 60,
-    },
-    {
-      title: 'Devemos comprar uma cafeteira?',
-      description: 'Vamos discutir a necessidade de se ter uma cafeteira na empresa',
-      created_at: '2021-09-10',
-      votingTime: 70,
+  useEffect(() => {
+    ScheduleService.getSchedulesPending().then(response => {
+      if (response === 500) {
+        console.log('Erro ao buscar pautas pendentes');
+      } else if (response === 404) {
+        console.log('Nenhuma pauta pendente encontrada');
+      } else {
+        setSchedulesPending(response);
+      }
     }
-  ];
+    );
+  }, []);
 
   const schedulesCompleted = [
     {
