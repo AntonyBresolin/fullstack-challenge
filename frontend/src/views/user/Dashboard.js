@@ -82,7 +82,7 @@ const Dashboard = () => {
       if (parentRef.current) {
         const parentWidth = parentRef.current.offsetWidth;
         const itemWidth = 288;
-        const calculatedSize = Math.floor((parentWidth-64) / itemWidth);
+        const calculatedSize = Math.floor((parentWidth-64) / (itemWidth+40));
         setSize(calculatedSize);
       }
     };

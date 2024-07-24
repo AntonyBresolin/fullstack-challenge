@@ -5,7 +5,7 @@ import LoginComponent from '../../components/LoginComponent/LoginComponent';
 const HomePage = () => {
   return (
     <div className='flex justify-between items-center h-screen w-screen overflow-y-hidden'>
-      <div className='hidden md:w-3/5'>
+      <div className='hidden md:block md:w-3/5'>
         <img
           className='bg-cover h-full w-full'
           src={require("../../assets/images/bglogin.png")}
