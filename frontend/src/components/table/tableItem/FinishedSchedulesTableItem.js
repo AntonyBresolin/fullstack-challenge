@@ -4,8 +4,7 @@ import React from 'react';
 const FinishedSchedulesTableItem = ({ title, totalVotes, totalVotesInFavor, totalVotesAgainst, totalInvalidVotes }) => {
   return (
     <tr className="bg-white border-b hover:bg-gray-50">
-      <td className="py-2">
-        <div className='bg-defaultBg w-12 h-12 rounded-full inline-block align-middle mr-2'></div>
+      <td className="py-6 px-6">
         <span className='align-middle inline-block text-primary font-semibold'> {title} </span>
       </td>
       <td className="px-6">

@@ -50,7 +50,6 @@ const Dashboard = () => {
           console.log('Nenhuma pauta concluída encontrada');
         } else {
           setSchedulesCompleted(completedResponse);
-          console.log(completedResponse);
         }
       } catch (error) {
         console.error('Erro ao buscar pautas:', error);
