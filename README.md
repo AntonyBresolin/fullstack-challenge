@@ -1,3 +1,81 @@
+# Projeto Fullstack Challenge
+
+Este projeto é uma aplicação fullstack que consiste em um frontend em React e um backend em Spring Boot. O projeto é containerizado usando Docker, e utiliza MySQL como banco de dados.
+
+## Estrutura do Projeto
+
+- **frontend**: Contém a aplicação React.
+- **backend**: Contém a aplicação Spring Boot.
+- **docker**: Contém a configuração do Docker Compose e outros arquivos relacionados ao Docker.
+- **planning**: Contém os requisitos e documentos de arquitetura do projeto.
+
+## Arquitetura
+
+Os detalhes da arquitetura podem ser encontrados nos seguintes recursos:
+- [Excalidraw](https://excalidraw.com/#json=lhimBwym5HzXJ5x3BMR6J,SM4bw5uPP2dVp_z1TgwMfA)
+- [Notion](https://www.notion.so/c30b1543595f4153a55f5b86fa0a630b?v=ae7e12ba3b55421b87c27fc8ac752876)
+
+## Pré-requisitos
+
+- Docker
+- Docker Compose
+
+## Primeiros Passos
+
+### Clonar o Repositório
+
+```bash
+git clone https://github.com/AntonyBresolin/fullstack-challenge.git
+cd fullstack-challenge
+```
+
+### Construir e Executar o Projeto
+
+1. **Navegue até o diretório `docker`:**
+
+```bash
+cd docker
+```
+
+2. **Construa e inicie os containers:**
+
+```bash
+docker-compose up --build
+```
+
+### Acessar a Aplicação
+
+- **Frontend**: A aplicação React estará acessível em [http://localhost:3000](http://localhost:3000).
+- **Backend**: A aplicação Spring Boot estará acessível em [http://localhost:8080](http://localhost:8080).
+
+### Parar os Containers
+
+Para parar os containers em execução, execute:
+
+```bash
+docker-compose down
+```
+
+## Requisitos do Projeto
+
+Os requisitos do projeto estão detalhados na pasta `/planning`.
+
+## Tecnologias Utilizadas
+
+- **Frontend**: React, TailwindCSS, React Router
+- **Backend**: Spring Boot, Spring Data JPA, Spring Security, MySQL
+- **Banco de Dados**: MySQL
+- **Containerização**: Docker, Docker Compose
+
+## Contato
+
+Para quaisquer dúvidas ou sugestões, sinta-se à vontade para entrar em contato.
+
+
+
+
+
+
 # Votação
 
 ## Objetivo
