@@ -2,6 +2,18 @@
 
 Este projeto é uma aplicação fullstack que consiste em um frontend em React e um backend em Spring Boot. O projeto é containerizado usando Docker, e utiliza MySQL como banco de dados.
 
+### Uma breve explicação de como se utilizar o projeto:
+Ao iniciar a aplicação, um administrador é gerado com os seguintes dados:
+```bash 
+cpf: 43194161040
+senha "123"
+```
+
+Ao logar, é possivel verificar os campos de administração e cadastrar novos usuários.
+Conforme os requisitos estipulados, mesmo que o cpf esteja certo, existem 50% de chance do usuário não ser autorizado para votação.
+
+
+
 ## Estrutura do Projeto
 
 - **frontend**: Contém a aplicação React.
@@ -71,6 +83,8 @@ Os requisitos do projeto estão detalhados na pasta `/planning`.
 
 Para quaisquer dúvidas ou sugestões, sinta-se à vontade para entrar em contato.
 
+
+==================
 
 
 
