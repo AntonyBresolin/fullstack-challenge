@@ -10,6 +10,10 @@ import com.antonybresolin.backend.repository.VotingResultRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 
 import java.util.List;
 
@@ -60,13 +64,15 @@ public class ScheduleController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Iterable<Schedule>> listSchedules() {
-        return ResponseEntity.ok(scheduleRepository.findAllByActiveTrueOrderByCreatedAt());
+    public ResponseEntity<Page<Schedule>> listSchedules(@RequestParam int page, @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(scheduleRepository.findAllByActiveTrueOrderByCreatedAt(pageable));
     }
 
     @GetMapping("/listCompleted")
-    public ResponseEntity<Iterable<VotingResult>> listCompletedSchedules() {
-        return ResponseEntity.ok(votingResultRepository.findAllByOrderByFinalResultTimeAsc());
+    public ResponseEntity<Page<VotingResult>> listCompletedSchedules(@RequestParam int page, @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(votingResultRepository.findAllByOrderByFinalResultTimeAsc(pageable));
     }
 
     public void generateVotingResult(Long scheduleId) {

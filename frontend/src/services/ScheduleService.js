@@ -25,9 +25,9 @@ export class ScheduleService {
     }
   }
 
-  static async getSchedulesPending() {
+  static async getSchedulesPending(page, size) {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/schedule/list', {
+      const response = await fetch(`http://localhost:8080/api/v1/schedule/list?page=${page}&size=${size}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ export class ScheduleService {
         } else if (response.status === 401) {
           return 401;
         }
-          else {
+        else {
           return 500
         }
       })
@@ -52,9 +52,9 @@ export class ScheduleService {
     }
   }
 
-  static async getSchedulesCompleted() {
+  static async getSchedulesCompleted(page, size) {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/schedule/listCompleted', {
+      const response = await fetch(`http://localhost:8080/api/v1/schedule/listCompleted?page=${page}&size=${size}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
