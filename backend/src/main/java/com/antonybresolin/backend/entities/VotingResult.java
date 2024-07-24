@@ -80,6 +80,14 @@ public VotingResult(Long totalVotes, Long totalInvalidVotes, Long totalVotesAgai
         return totalVotesInFavor;
     }
 
+    public Boolean getApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(Boolean approved) {
+        isApproved = approved;
+    }
+
     public void setTotalVotesInFavor(Long totalVotesInFavor) {
         this.totalVotesInFavor = totalVotesInFavor;
     }

@@ -35,6 +35,11 @@ public class VoteController {
             if (user.isEmpty()) {
                 return ResponseEntity.status(401).build();
             }
+
+            boolean hasVoted = voteRepository.existsByUserAndSchedule(user.get(), dto.schedule());
+            if (hasVoted) {
+                return ResponseEntity.status(409).build();
+            }
             Vote vote = new Vote(dto.schedule(), dto.voteStartTime(), dto.voteEndTime(), Vote.VoteValue.valueOf(dto.value().toUpperCase()), user.get());
             voteRepository.save(vote);
         } catch (Exception e) {
