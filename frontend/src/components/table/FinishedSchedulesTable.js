@@ -1,7 +1,7 @@
 import React from 'react';
 import FinishedSchedulesTableItem from './tableItem/FinishedSchedulesTableItem';
 
-const FinishedSchedulesTable = ({ schedulesCompleted }) => {
+const FinishedSchedulesTable = ({ schedulesCompleted, setPage }) => {
   return (
     <div>
       <div className="relative overflow-x-auto shadow-md w-full">
@@ -48,6 +48,10 @@ const FinishedSchedulesTable = ({ schedulesCompleted }) => {
             )) : <tr><td colSpan="6" className="text-center py-4">Nenhuma pauta finalizada listada</td></tr>}
           </tbody>
         </table>
+      </div>
+      <div className='float-right gap-x-2 flex mt-2'>
+        <button onClick={() => setPage(prev => Math.max(prev - 1, 0))} className='bg-gray-400 text-white px-4 py-2 rounded-xl mt-4 hover:bg-gray-500 duration-150 ease-in-out'>Anterior</button>
+        <button onClick={() => setPage(prev => prev + 1)} className='bg-gray-600 text-white px-4 py-2 rounded-xl mt-4 hover:bg-gray-700 duration-150 ease-in-out'>Próximo</button>
       </div>
     </div>
   );

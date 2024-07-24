@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PendingSchedulesTableItem from './tableItem/PendingSchedulesTableItem';
 import FinishScheduleModal from '../schedule/modal/FinishScheduleModal';
 
-const PendingSchedulesTable = ({ schedulesPending }) => {
+const PendingSchedulesTable = ({ schedulesPending, setPage }) => {
   const [selectedSchedule, setSelectedSchedule] = useState(null);
   const [showModal, setShowModal] = useState(null);
 
@@ -62,6 +62,10 @@ const PendingSchedulesTable = ({ schedulesPending }) => {
             )) : <tr><td colSpan="6" className="text-center py-4">Nenhuma pauta pendente listada</td></tr>}
           </tbody>
         </table>
+      </div>
+      <div className='float-right gap-x-2 flex mt-2'>
+        <button onClick={() => setPage(prev => Math.max(prev - 1, 0))} className='bg-gray-400 text-white px-4 py-2 rounded-xl mt-4 hover:bg-gray-500 duration-150 ease-in-out'>Anterior</button>
+        <button onClick={() => setPage(prev => prev + 1)} className='bg-gray-600 text-white px-4 py-2 rounded-xl mt-4 hover:bg-gray-700 duration-150 ease-in-out'>Próximo</button>
       </div>
       {showModal === "endSchedule" && (
         <div className='absolute top-0 right-0 w-screen h-screen'>
