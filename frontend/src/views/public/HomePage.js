@@ -5,7 +5,7 @@ import LoginComponent from '../../components/LoginComponent/LoginComponent';
 const HomePage = () => {
   return (
     <div className='flex justify-between items-center h-screen w-screen overflow-y-hidden'>
-      <div className='w-3/5'>
+      <div className='hidden md:w-3/5'>
         <img
           className='bg-cover h-full w-full'
           src={require("../../assets/images/bglogin.png")}
@@ -16,7 +16,7 @@ const HomePage = () => {
           <h1 className='2xl:text-3xl xl:text-2xl text-white font-medium  pb-24 text-justify'>Acompanhe a contagem dos votos das pautas e participe da votação</h1>
         </div>
       </div>
-      <div className='w-2/5  h-full'>
+      <div className='w-full md:w-2/5  h-full'>
         <LoginComponent />
       </div>
     </div>

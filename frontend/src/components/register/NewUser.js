@@ -58,7 +58,7 @@ const NewUser = () => {
 
   return (
     <form onSubmit={handleSubmit} >
-      <div className='w-full flex justify-between border-b-2 border-gray-100 py-4'>
+      <div className='w-full flex flex-col md:flex-row justify-between border-b-2 border-gray-100 py-4'>
         <div className='w-full'>
           <h2 className='text-xl font-semibold'>CPF</h2>
           <p className='text-secondary'>Esse nome será exibido no seu perfil.</p>
@@ -76,7 +76,7 @@ const NewUser = () => {
           <span onClick={handleGenerateCPF} className='text-sky-500 text-center uppercase cursor-pointer  hover:text-sky-600 font-semibold'> gerar cpf válido </span>
         </div>
       </div>
-      <div className='w-full flex justify-between border-b-2 border-gray-100 py-4'>
+      <div className='w-full flex flex-col md:flex-row justify-between border-b-2 border-gray-100 py-4'>
         <div className='w-full'>
           <h2 className='text-xl font-semibold'>Insira a senha:</h2>
         </div>
@@ -91,7 +91,7 @@ const NewUser = () => {
         </div>
         <div className='w-full'></div>
       </div>
-      <div className='w-full flex justify-between border-b-2 border-gray-100 py-16 '>
+      <div className='w-full flex flex-col md:flex-row justify-between border-b-2 border-gray-100 py-16 '>
         <div>
           <h2 className='text-xl font-semibold'>Cadastrar um novo cooperado</h2>
           <p className='text-secondary'>Preencha as informações para cadastrar um novo usuário</p>

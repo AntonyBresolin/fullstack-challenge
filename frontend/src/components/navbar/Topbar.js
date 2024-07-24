@@ -9,7 +9,7 @@ import { LoginControllerService } from "../../services/LoginControllerService";
 
 
 const Topbar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [dropdown, setDropdown] = useState(false);
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const Topbar = () => {
               <AccountCircleIcon fontSize="" className="text-[45px] " />
             </div>
           </div>
-          <div className={`absolute md:mt-[60px] right-8 bg-[#fff] ${dropdown ? "block" : "hidden"} rounded-b-lg shadow-lg `}>
+          <div className={`absolute mt-[60px] right-8 bg-[#fff] ${dropdown ? "block" : "hidden"} rounded-b-lg shadow-lg `}>
             <ul className="text-green-700">
               <div onClick={() => { handleLogout() }} to="/" className="cursor-pointer p-2 w-64  select-none flex items-center hover:bg-slate-100 ">
                 <LogoutIcon fontSize="" className="text-2xl mr-4" />
