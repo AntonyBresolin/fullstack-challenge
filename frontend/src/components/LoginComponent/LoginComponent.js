@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../routes/AuthProvider';
 import { CircularProgress } from '@mui/material';
 import Swal from 'sweetalert2';
+import { isValidCPF } from '../../utils/cpfUtils';
 
 const LoginComponent = () => {
   const navigate = useNavigate();
@@ -18,6 +19,16 @@ const LoginComponent = () => {
       cpf: e.target.cpf.value,
       password: e.target.password.value
     };
+
+    if (!isValidCPF(dataLogin.cpf)) {
+      Swal.fire({
+        title: 'Erro',
+        text: 'CPF inválido',
+        icon: 'error'
+      });
+      setOnLoad(false);
+      return;
+    }
 
     try {
       const response = await LoginControllerService.loginUser(dataLogin);

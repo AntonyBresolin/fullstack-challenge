@@ -1,6 +1,7 @@
 import React from 'react';
 import Swal from 'sweetalert2'
 import { UserService } from '../../services/UserService';
+import { generateCPF, isValidCPF } from '../../utils/cpfUtils';
 
 const NewUser = () => {
   const handleSubmit = (e) => {
@@ -8,6 +9,15 @@ const NewUser = () => {
     const data = {
       cpf: e.target.cpf.value,
       password: e.target.password.value
+    }
+
+    if (!isValidCPF(data.cpf)) {
+      Swal.fire({
+        title: "Erro",
+        text: "CPF inválido!",
+        icon: "error"
+      });
+      return;
     }
 
     UserService.registerUser(data).then(response => {
@@ -40,6 +50,11 @@ const NewUser = () => {
     })
   }
 
+  const handleGenerateCPF = () => {
+    const cpf = generateCPF();
+    document.getElementById("cpf").value = cpf;
+  };
+
 
   return (
     <form onSubmit={handleSubmit} >
@@ -58,7 +73,7 @@ const NewUser = () => {
           />
         </div>
         <div className='w-full flex items-center justify-center'>
-          <span className='text-sky-500 text-center uppercase cursor-pointer  hover:text-sky-600 font-semibold'> gerar cpf válido </span>
+          <span onClick={handleGenerateCPF} className='text-sky-500 text-center uppercase cursor-pointer  hover:text-sky-600 font-semibold'> gerar cpf válido </span>
         </div>
       </div>
       <div className='w-full flex justify-between border-b-2 border-gray-100 py-4'>

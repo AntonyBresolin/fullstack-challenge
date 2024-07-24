@@ -12,8 +12,8 @@ const PendingSchedulesTableItem = ({ schedule, onSelectSchedule, onChooseModal }
 
   return (
     <tr className="bg-white border-b hover:bg-gray-50">
-      <td className="py-4 px-6">
-        <span className='h align-middle inline-block text-primary font-semibold truncate'> {schedule.title} </span>
+      <td className="py-4 px-6 truncate">
+        <span className='align-middle inline-block text-primary font-semibold'> {schedule.title} </span>
       </td>
       <td className="px-6 table-cell truncate">
         {schedule.description}
