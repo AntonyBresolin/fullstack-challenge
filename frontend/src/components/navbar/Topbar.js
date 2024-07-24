@@ -42,8 +42,8 @@ const Topbar = () => {
               'hover:text-slate-600': !dropdown,
             })} onClick={() => handleDropdown()}>
               <div className="flex flex-col text-center mr-2">
-                <h2 className="font-bold text-xl mb-0 pb-0 capitalize">111.111.111-11</h2>
-                <p className="text-secondary italic text-xs	mt-0 pt-0 capitalize">Empresas empresas</p>
+                <h2 className="font-bold text-xl mb-0 pb-0 capitalize">{localStorage.getItem("userLogged") ? localStorage.getItem("userLogged") : "Cooperado"}</h2>
+                <p className="text-secondary italic text-xs	mt-0 pt-0 capitalize">We Solutions</p>
               </div>
               <AccountCircleIcon fontSize="" className="text-[45px] " />
             </div>

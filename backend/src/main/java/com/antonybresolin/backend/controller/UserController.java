@@ -36,13 +36,12 @@ public class UserController {
     @PostMapping("/create")
     @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<Void> newUser(@RequestBody CreateUserDto dto) {
-        // TODO - Definir melhor essa criação de exceção, fazer uma customizada
-        // TODO - incluir validações
-        if (dto.cpf() != null) {
-            Random random = new Random();
-            if (random.nextBoolean()){
-                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não pode votar");
-            }
+        if (!isValidCPF(dto.cpf())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "CPF inválido");
+        }
+
+        if (randomizeVote()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Não pode votar");
         }
 
         var basicRole = roleRepository.findByName(Role.Values.BASIC.name());
@@ -63,4 +62,25 @@ public class UserController {
 
         return ResponseEntity.ok().build();
     }
+
+    private boolean isValidCPF(String cpf) {
+        if (cpf == null || cpf.length() != 11 || cpf.matches("^(.)\\1*$")) return false;
+        int[] cpfArray = cpf.chars().map(Character::getNumericValue).toArray();
+
+        int sum = 0, weight = 10;
+        for (int i = 0; i < 9; i++) sum += cpfArray[i] * weight--;
+        int firstDigit = (sum * 10 % 11) % 10;
+        if (firstDigit != cpfArray[9]) return false;
+
+        sum = 0; weight = 11;
+        for (int i = 0; i < 10; i++) sum += cpfArray[i] * weight--;
+        int secondDigit = (sum * 10 % 11) % 10;
+        return secondDigit == cpfArray[10];
+    }
+
+    private boolean randomizeVote() {
+        Random random = new Random();
+        return random.nextBoolean();
+    }
+
 }

@@ -13,15 +13,12 @@ export class LoginControllerService {
         const data = await response.json();
         localStorage.setItem('role', data.role);
         localStorage.setItem('user', data.accessToken);
-        return response.status;
-      } else if (response.status === 401) {
-        return 401;
-      } else {
-        return 500;
       }
+
+      return response.status;
     } catch (error) {
       console.error('Error:', error);
-      return 500;
+      return 500; 
     }
   }
 
