@@ -16,8 +16,9 @@ const Sidebar = ({ open }) => {
   }
 
   return (
-    <div className={classNames('bg-[#fff] sticky left-0 top-0 h-screen w-1/5 shadow-md ease-in-out duration-150 select-none', {
-      'w-[78px]': open,
+    <div className={classNames('bg-[#fff] absolute md:sticky left-0 top-0 h-screen  shadow-md ease-in-out duration-150 select-none', {
+      'w-0 md:w-[78px]': open,
+      "w-1/2 md:w-1/5": !open
     })}>
       <nav className='flex flex-col pt-[61px] justify-between h-full'>
         <div className='flex flex-col items-center px-2 py-2'>
@@ -25,6 +26,7 @@ const Sidebar = ({ open }) => {
             'w-full flex items-center py-4 px-4 rounded-2xl  font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
             'bg-emerald-800 text-white': selected === 0,
             'text-emerald-800': selected !== 0,
+            'hidden md:block': open,
           })} onClick={() => handleSelected(0)}>
             <DashboardIcon fontSize='' className={classNames(
               'text-3xl', {
@@ -39,6 +41,7 @@ const Sidebar = ({ open }) => {
               'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
               'bg-emerald-800 text-white': selected === 1,
               'text-emerald-800': selected !== 1,
+              'hidden md:block': open,
             })} onClick={() => handleSelected(1)}>
               <PersonAddIcon fontSize='' className={classNames(
                 'text-3xl', {
@@ -53,6 +56,7 @@ const Sidebar = ({ open }) => {
               'w-full flex items-center py-4 px-4 rounded-2xl font-bold my-2 cursor-pointer hover:shadow-md duration-300 ease-in-out', {
               'bg-emerald-800 text-white': selected === 2,
               'text-emerald-800': selected !== 2,
+              'hidden md:block': open,
             })}
               onClick={() => handleSelected(2)}>
               <AddchartIcon fontSize='' className={classNames(
