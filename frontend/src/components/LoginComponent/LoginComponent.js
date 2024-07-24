@@ -1,35 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LoginControllerService } from '../../services/LoginControllerService';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../routes/AuthProvider';
+import { CircularProgress } from '@mui/material';
+import Swal from 'sweetalert2';
 
 const LoginComponent = () => {
   const navigate = useNavigate();
   const { setAuthToken } = useAuth();
+  const [onLoad, setOnLoad] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setOnLoad(true);
 
     const dataLogin = {
       cpf: e.target.cpf.value,
       password: e.target.password.value
     };
 
-    LoginControllerService.loginUser(dataLogin)
-      .then((response) => {
+    try {
+      const response = await LoginControllerService.loginUser(dataLogin);
 
-        if (response === 200) {
-          setAuthToken(localStorage.getItem('user'));
-          setTimeout(() => {
-            navigate("/user/dashboard");
-          }, 500);
-        } else if (response === 401) {
-          console.log('Usuário ou senha inválidos');
-        } else {
-          console.log('Erro ao efetuar login');
-        }
-      })
-  }
+      setOnLoad(false);
+
+      if (response === 200) {
+        setAuthToken(localStorage.getItem('user'));
+        Swal.fire({
+          title: 'Login realizado com sucesso!',
+          text: 'Você será redirecionado para o dashboard.',
+          icon: 'success',
+          timer: 1500,
+          showConfirmButton: false
+        });
+        setTimeout(() => {
+          localStorage.setItem("userLogged", dataLogin.cpf);
+          navigate("/user/dashboard");
+        }, 1500);
+      } else if (response === 401) {
+        Swal.fire({
+          title: 'Erro',
+          text: 'Usuário ou senha inválidos',
+          icon: 'error'
+        });
+      } else {
+        Swal.fire({
+          title: 'Erro',
+          text: 'Erro ao efetuar login. Tente novamente mais tarde.',
+          icon: 'error'
+        });
+      }
+    } catch (error) {
+      setOnLoad(false);
+      Swal.fire({
+        title: 'Erro',
+        text: 'Erro ao efetuar login. Tente novamente mais tarde.',
+        icon: 'error'
+      });
+    }
+  };
 
   return (
     <div className='h-full w-full flex flex-col items-center justify-between py-[20%]'>
@@ -67,9 +96,11 @@ const LoginComponent = () => {
           name="password"
           required
         />
-        <button type="submit" className="px-4 py-3 w-full bg-emerald-700 text-white text-opacity-70 font-bold text-xl rounded-lg hover:text-opacity-100 hover:bg-emerald-800 duration-150 ease-in-out">Entrar</button>
+        <button type="submit" className="px-4 py-3 w-full bg-emerald-700 text-white text-opacity-70 font-bold text-xl rounded-lg hover:text-opacity-100 hover:bg-emerald-800 duration-150 ease-in-out" disabled={onLoad}>
+          {onLoad ? <CircularProgress color="inherit" size={24} /> : "Entrar"}
+        </button>
       </form>
-      <p className='text-sm'>Não tem uma conta? <span href="#" className='text-emerald-700 hover:text-emerald-800 cursor-pointer'>Cadastre-se</span></p>
+      <p className='text-sm'>Não tem uma conta? <span href="#" className='text-emerald-700 hover:text-emerald-800 cursor-pointer'>Contate um responsável</span></p>
     </div>
   );
 };
