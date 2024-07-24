@@ -1,12 +1,46 @@
+version: '3.8'
+
 services:
   mysql:
-    image: mysql
+    image: mysql:latest
+    container_name: mysql-container
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
     environment:
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=123
       - MYSQL_DATABASE=mydb
       - MYSQL_ROOT_PASSWORD=123
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: backend-container
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mydb
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    restart: always
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: frontend-container
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  mysql-data:
