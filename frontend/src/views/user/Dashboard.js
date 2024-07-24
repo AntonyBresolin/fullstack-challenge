@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SchedulesPending from '../../components/schedule/SchedulesPending';
 import SchedulesCompleted from '../../components/schedule/SchedulesCompleted';
 import VoteModal from '../../components/vote/VoteModal';
@@ -13,9 +13,10 @@ const Dashboard = () => {
   const [modalType, setModalType] = useState(null);
   const [schedulesPending, setSchedulesPending] = useState([]);
   const [schedulesCompleted, setSchedulesCompleted] = useState([]);
-  const [size] = useState(4);
+  const [size, setSize] = useState(4);
   const [pendingPage, setPendingPage] = useState(0);
   const [completedPage, setCompletedPage] = useState(0);
+  const parentRef = useRef(null);
 
   const handleScheduleSelectedToVote = (schedule) => {
     setModalType('vote');
@@ -76,9 +77,27 @@ const Dashboard = () => {
     fetchSchedules(pendingPage, completedPage, size);
   }, [pendingPage, completedPage, size]);
 
+  useEffect(() => {
+    const calculateSize = () => {
+      if (parentRef.current) {
+        const parentWidth = parentRef.current.offsetWidth;
+        const itemWidth = 288;
+        const calculatedSize = Math.floor((parentWidth-64) / itemWidth);
+        setSize(calculatedSize);
+      }
+    };
+
+    calculateSize();
+    window.addEventListener('resize', calculateSize);
+
+    return () => {
+      window.removeEventListener('resize', calculateSize);
+    };
+  }, []);
+
   return (
     <>
-      <div className='px-[5%] pt-4 w-full h-full overflow-y-auto' >
+      <div ref={parentRef} className='px-[5%] pt-4 w-full h-full overflow-y-auto'>
         <h1 className='text-3xl font-semibold mb-8'>Bem Vindo Cooperado!</h1>
         <div className='flex flex-col justify-between gap-y-10'>
           <SchedulesPending schedules={schedulesPending} scheduleSelected={handleScheduleSelectedToVote} setPage={setPendingPage} />
@@ -87,13 +106,13 @@ const Dashboard = () => {
       </div>
       {modalType === 'vote' && (
         <div className='absolute top-0 right-0 w-screen h-screen'>
-          <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 ' onClick={handleCloseModal}></div>
+          <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50' onClick={handleCloseModal}></div>
           <VoteModal schedule={scheduleSelected} closeModal={handleCloseModal} handleAccept={handleScheduleSelectedToVotation} />
         </div>
       )}
       {modalType === 'votation' && (
         <div className='absolute top-0 right-0 w-screen h-screen'>
-          <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50 ' onClick={handleCloseModal}></div>
+          <div className='absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50' onClick={handleCloseModal}></div>
           <VotationModal schedule={scheduleSelected} closeModal={handleCloseModal} />
         </div>
       )}
