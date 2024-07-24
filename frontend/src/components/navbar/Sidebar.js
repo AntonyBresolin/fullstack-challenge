@@ -16,7 +16,7 @@ const Sidebar = ({ open }) => {
   }
 
   return (
-    <div className={classNames('bg-[#fff] absolute md:sticky left-0 top-0 h-screen  shadow-md ease-in-out duration-150 select-none', {
+    <div className={classNames('bg-[#fff] absolute z-10 md:sticky left-0 top-0 h-screen  shadow-md ease-in-out duration-150 select-none', {
       'w-0 md:w-[78px]': open,
       "w-1/2 md:w-1/5": !open
     })}>
@@ -85,7 +85,9 @@ const Sidebar = ({ open }) => {
         </div>
         <div>
           <hr></hr>
-          <div className='text-[#98A2B3] text-center py-4 hover:text-gray-600 ease-in-out duration-150 cursor-pointer'>
+          <div className={classNames('text-[#98A2B3] text-center py-4 hover:text-gray-600 ease-in-out duration-150 cursor-pointer', {
+            'hidden md:block': open
+          })}>
             <HelpIcon fontSize='' className='text-xl mr-2' />
             <span className={classNames('', { 'hidden': open })}>Ajuda</span>
           </div>

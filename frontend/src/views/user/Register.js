@@ -10,7 +10,7 @@ const Register = () => {
     setSelected(value);
   }
   return (
-    <div className='px-[5%] pt-4 w-full h-full overflow-y-auto'>
+    <div className='md:px-[5%] pt-4 w-full h-full overflow-y-auto'>
       <div className='bg-white  py-12 px-8 overflow-x-hidden rounded-xl h-full'>
         <h1 className='text-3xl font-semibold pb-8 '>Cadastros</h1>
         <ul className='flex items-center px-4 text-secondary'>

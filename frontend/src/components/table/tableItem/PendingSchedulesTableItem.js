@@ -1,6 +1,6 @@
 import React from 'react';
 import CheckIcon from '@mui/icons-material/Check';
-import SearchIcon from '@mui/icons-material/Search';
+//import SearchIcon from '@mui/icons-material/Search';
 
 
 const PendingSchedulesTableItem = ({ schedule, onSelectSchedule, onChooseModal }) => {
@@ -15,10 +15,10 @@ const PendingSchedulesTableItem = ({ schedule, onSelectSchedule, onChooseModal }
       <td className="py-4 px-6 truncate">
         <span className='align-middle inline-block text-primary font-semibold'> {schedule.title} </span>
       </td>
-      <td className="px-6 table-cell truncate">
+      <td className="px-6 hidden md:table-cell truncate">
         {schedule.description}
       </td>
-      <td className="px-6 table-cell">
+      <td className="px-6 hidden md:table-cell">
         {schedule.votingTime}
       </td>
       <td className="px-6 table-cell">
@@ -26,8 +26,8 @@ const PendingSchedulesTableItem = ({ schedule, onSelectSchedule, onChooseModal }
       </td>
       <td className="px-6 table-cell">
         <div className='flex justify-end items-center gap-x-2'>
-          <div
-            className='bg-gray-400 rounded-full text-white p-1 cursor-pointer hover:bg-gray-500 duration-150 ease-in-out'><SearchIcon /></div>
+          {/*<div
+            className='bg-gray-400 rounded-full text-white p-1 cursor-pointer hover:bg-gray-500 duration-150 ease-in-out'><SearchIcon /></div>*/}
           <div
             className='bg-green-700 rounded-full text-white p-1 cursor-pointer hover:bg-green-800 duration-150 ease-in-out'
             onClick={() => { onSelectSchedule(schedule); onChooseModal("endSchedule") }}

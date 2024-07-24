@@ -13,7 +13,7 @@ const Dashboard = () => {
   const [modalType, setModalType] = useState(null);
   const [schedulesPending, setSchedulesPending] = useState([]);
   const [schedulesCompleted, setSchedulesCompleted] = useState([]);
-  const [size, setSize] = useState(4);
+  const [size, setSize] = useState(1);
   const [pendingPage, setPendingPage] = useState(0);
   const [completedPage, setCompletedPage] = useState(0);
   const parentRef = useRef(null);
