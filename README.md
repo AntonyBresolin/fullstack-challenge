@@ -1,6 +1,31 @@
 # Projeto Fullstack Challenge
+## Este projeto é uma aplicação fullstack que consiste em um frontend em React e um backend em Spring Boot. O projeto é containerizado usando Docker, e utiliza MySQL como banco de dados.
 
-Este projeto é uma aplicação fullstack que consiste em um frontend em React e um backend em Spring Boot. O projeto é containerizado usando Docker, e utiliza MySQL como banco de dados.
+
+Segue imagens do projeto:
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between">
+
+![Login page](./imagesReadMe/image.png)
+
+![img_2.png](imagesReadMe%2Fimg_2.png)
+![img_3.png](imagesReadMe%2Fimg_3.png)
+![img_4.png](imagesReadMe%2Fimg_4.png)
+
+![img_1.png](imagesReadMe%2Fimg_1.png)
+![img.png](imagesReadMe%2Fimg.png)
+![img_5.png](imagesReadMe%2Fimg_5.png)
+![img_6.png](imagesReadMe%2Fimg_6.png)
+![img_7.png](imagesReadMe%2Fimg_7.png)
+![img_8.png](imagesReadMe%2Fimg_8.png)
+![img_9.png](imagesReadMe%2Fimg_9.png)
+![img_10.png](imagesReadMe%2Fimg_10.png)
+![img_11.png](imagesReadMe%2Fimg_11.png)
+![img_12.png](imagesReadMe%2Fimg_12.png)
+![img_13.png](imagesReadMe%2Fimg_13.png)
+![img_14.png](imagesReadMe%2Fimg_14.png)
+
+</div>
+
 
 ### Uma breve explicação de como se utilizar o projeto:
 Ao iniciar a aplicação, um administrador é gerado com os seguintes dados:
