@@ -1,11 +1,13 @@
 # Projeto Fullstack Challenge
-## Este projeto é uma aplicação fullstack que consiste em um frontend em React e um backend em Spring Boot. O projeto é containerizado usando Docker, e utiliza MySQL como banco de dados.
+### Este projeto foi desenvolvido em 4 dias, ele consiste em uma aplicação fullstack para controle de votação em pautas para uma cooperativa. Frontend desenvolvido em React e backend em Spring Boot. O projeto é containerizado usando Docker, e utiliza MySQL como banco de dados.
 
 
 Segue imagens do projeto:
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: space-between">
 
 ![Login page](./imagesReadMe/image.png)
+
+![img_14.png](imagesReadMe%2Fimg_14.png)
 
 ![img_2.png](imagesReadMe%2Fimg_2.png)
 ![img_3.png](imagesReadMe%2Fimg_3.png)
@@ -22,7 +24,6 @@ Segue imagens do projeto:
 ![img_11.png](imagesReadMe%2Fimg_11.png)
 ![img_12.png](imagesReadMe%2Fimg_12.png)
 ![img_13.png](imagesReadMe%2Fimg_13.png)
-![img_14.png](imagesReadMe%2Fimg_14.png)
 
 </div>
 
